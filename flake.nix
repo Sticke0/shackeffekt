@@ -17,7 +17,6 @@
           buildInputs = with pkgs; [ minify python3 ];
           buildPhase = ''
             python3 build.py
-            mkdir -p "$out"
             minify -o "$out/index.html" index.html
             minify -o "$out/stylesheet.css" stylesheet.css
             cp -r images "$out/"
@@ -27,12 +26,10 @@
 
         buildScript = pkgs.writeShellScriptBin "build" ''
           set -e
-          cd src
-          python3 build.py
-          mkdir -p ../dist
-          ${pkgs.minify}/bin/minify -o ../dist/index.html index.html
-          ${pkgs.minify}/bin/minify -o ../dist/stylesheet.css stylesheet.css
-          cp -r images ../dist/
+          python3 src/build.py --out dist
+          ${pkgs.minify}/bin/minify -o dist/index.html dist/index.html
+          ${pkgs.minify}/bin/minify -o dist/stylesheet.css src/stylesheet.css
+          cp -r src/images dist/
           echo "Built to ./dist/"
         '';
       in

@@ -2,6 +2,8 @@
 **brand:** Schackeffekt
 **tagline:** Bättre tänkande – starkare samspel
 **email:** info@schackeffekt.se
+**font_url:** https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap
+**font_family:** 'Montserrat', sans-serif
 
 ## hero
 **title:** Bättre tänkande
@@ -14,10 +16,23 @@
 **heading:** Schack som<br>verktyg för utveckling
 **body:** Schackeffekt använder schack för att skapa lärande, fokus och samspel i olika miljöer - från klassrum till arbetsplatser och sociala möten
 
+## how
+**heading:** Så fungerar schackeffekt
+- **icon:** ♟️
+  **title:** Upplev
+  **desc:** Spela och testa direkt – lär genom att göra.
+- **icon:** images/brain-white.svg
+  **title:** Reflektera
+  **desc:** Förstå hur du tänker och fattar beslut.
+- **icon:** images/arrows-white.svg
+  **title:** Överför
+  **desc:** Använd insikterna i verkliga situationer.
+
 ## programs
 **heading:** Våra områden
 - **title:** Barn & unga
   **desc:** Utvecklar fokus, lärande och självförtroende
+  **image:** images/hero-bg.jpg
 - **title:** Senior & gemenskap
   **desc:** Skapar möten, stimulans och social samvaro
 - **title:** Inkludering & lärande

@@ -191,31 +191,40 @@ section {
   margin-right: 25px;
 }
 
-#what div {
+#what .what-row {
   display: flex;
   flex-direction: row;
-  width: 60%;
-  padding: 10px 0;
+  align-items: flex-start;
+}
+
+#what .what-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  padding: 10px 20px;
+}
+
+#what .what-heading h2 {
+  margin-bottom: 0;
+  font-size: 1.7rem;
   text-align: left;
-  justify-content: space-between;
+}
 
+.what-divider {
+  width: 1px;
+  background: #ccc;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin: 0;
+  border: none;
+}
+
+#what .what-body {
+  flex: 1;
+  padding: 10px 20px;
+  text-align: left;
   font-size: 1.1rem;
-
-  .divider {
-    flex: 0;
-    border: 1px solid #ccc;
-    margin: 1rem 2rem;
-  }
-
-  div {
-    flex: 1;
-
-    h2 {
-      margin-bottom: 0;
-      font-size: 1.7rem;
-      text-align: left;
-    }
-  }
 }
 
 #program {
@@ -265,23 +274,23 @@ section {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 60px;
+  flex-wrap: wrap;
   margin-top: 40px;
   position: relative;
 }
 
 .how-step {
-  flex: 1;
-  max-width: 280px;
+  width: 280px;
   text-align: center;
   padding: 30px 20px;
   position: relative;
+  margin: 0 30px;
 }
 
 .how-step + .how-step::before {
   content: "→";
   position: absolute;
-  left: -40px;
+  left: -30px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 3rem;
@@ -416,10 +425,22 @@ section {
 @media (max-width: 900px) {
   .program-grid, .how-steps {
     flex-direction: column;
+  }
+  .how-steps {
     gap: 20px;
+  }
+  .how-step {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
   }
   #hero h1 {
     font-size: 2.5rem;
+    max-width: 85%;
+  }
+  #hero p {
+    font-size: 1.1rem;
+    max-width: 80%;
   }
   .program-card {
     flex: 1 1 100%;
@@ -452,6 +473,91 @@ section {
     margin: 16px 0;
     align-self: stretch;
   }
+  .split-section-text-inner {
+    width: 80%;
+  }
+  header .container.flex-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  #cta .cta-row.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  footer .container.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  footer .brand {
+    justify-content: center;
+  }
+  #what .what-row {
+    flex-direction: column;
+  }
+  #what .what-heading {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .what-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+    margin: 0.5rem 0;
+  }
+  #what .what-body {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 15px;
+  }
+  #hero h1 {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+  #hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  #hero {
+    padding-top: 10vh;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .step-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  .program-grid {
+    grid-template-columns: 1fr;
+  }
+  nav a {
+    margin-right: 12px;
+    font-size: 0.8rem;
+  }
+  nav .btn {
+    margin-left: 12px;
+    margin-right: 0;
+    padding: 8px 14px !important;
+    font-size: 0.8rem;
+  }
+  #cta .brand-text h2 {
+    font-size: 1.2rem;
+  }
+  .cta-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .cta-icon span {
+    font-size: 1.5rem;
+  }
 }
 
 /* Shared utilities */
@@ -475,6 +581,12 @@ section {
 
 .icon-white {
   filter: brightness(0) invert(1);
+}
+
+.icon-img {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .btn-dark {

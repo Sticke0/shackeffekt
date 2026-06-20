@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-"""Generate index.html from site.md content."""
+"""Generate index.html from site.md content.
 
+Usage: python3 build.py [--out OUTPUT_DIR]
+"""
+
+import argparse
 import re
 from collections import OrderedDict
 from pathlib import Path
@@ -77,6 +81,15 @@ def body_html(val):
     return '<p>' + '<br>\n'.join(parts) + '</p>'
 
 
+
+def render_icon(icon):
+    if not icon:
+        return ''
+    if icon.startswith('\u265f') or len(icon) < 5:
+        return f'<span class="step-icon">{icon}</span>'
+    return f'<span class="icon-white"><img src="{icon}" alt="" class="icon-img"></span>'
+
+
 def render_sections(sections):
     out = []
 
@@ -129,15 +142,15 @@ def render_sections(sections):
         body = body_html(d.get('body', ''))
         out.append(f'''    <section id="what" class="section-bg-light">
         <div class="container">
-          <div>
-            <section style="display: flex; flex-direction: row; margin-right: 0; margin-left: auto;">
+          <div class="what-row">
+            <div class="what-heading">
               <span aria-hidden="true" style="font-size: 3rem;">♟️</span>
-              <h2 class="h2-no-underline">{heading}</h2>
-            </section>
-          </div>
-          <div class="divider"></div>
-          <div>
-            {body}
+              <h2 class="h2-no-underline" style="margin-left: 0.5rem;">{heading}</h2>
+            </div>
+            <div class="what-divider"></div>
+            <div class="what-body">
+              {body}
+            </div>
           </div>
         </div>
     </section>''')
@@ -150,11 +163,14 @@ def render_sections(sections):
             if isinstance(item, dict):
                 t = item.get('title', '')
                 desc = item.get('desc', '')
+                img = item.get('image', '')
             else:
                 t = item
                 desc = ''
+                img = ''
+            style = f' style="background-image:url(\'{img}\');background-size:cover;background-position:center"' if img else ''
             cards += f'''                <div class="program-card">
-                    <div class="image"></div>
+                    <div class="image"{style}></div>
                     <h3>{t}</h3>
                     <p>{desc}</p>
                 </div>
@@ -167,30 +183,28 @@ def render_sections(sections):
         </div>
     </section>''')
 
-    out.append('''    <section id="how" class="section-bg-dark">
+    if 'how' in sections:
+        d = sections['how']
+        heading = d.get('heading', 'Så fungerar schackeffekt')
+        steps = ''
+        for i, item in enumerate(d.get('items', [])):
+            if isinstance(item, dict):
+                icon = item.get('icon', '')
+                title = item.get('title', '')
+                desc = item.get('desc', '')
+            else:
+                icon = title = desc = ''
+            steps += f'''                <div class="how-step">
+                    <span class="step-circle" aria-hidden="true">{render_icon(icon)}</span>
+                    <h3>{title}</h3>
+                    <p>{desc}</p>
+                </div>
+'''
+        out.append(f'''    <section id="how" class="section-bg-dark">
         <div class="container">
-            <h2>Så fungerar schackeffekt</h2>
+            <h2>{heading}</h2>
             <div class="how-steps">
-                <div class="how-step">
-                    <span class="step-circle" aria-hidden="true"><span class="step-icon">♟️</span></span>
-                    <h3>Upplev</h3>
-                    <p>Spela och testa direkt – lär genom att göra.</p>
-                </div>
-                <div class="how-step">
-                    <span class="step-circle" aria-hidden="true">
-                        <img src="images/brain-idea-mind-svgrepo-com.svg" alt="" class="icon-white" style="width:2.5rem;height:2.5rem;">
-                    </span>
-                    <h3>Reflektera</h3>
-                    <p>Förstå hur du tänker och fattar beslut.</p>
-                </div>
-                <div class="how-step">
-                    <span class="step-circle" aria-hidden="true">
-                        <img src="images/arrows-rotate-svgrepo-com.svg" alt="" class="icon-white" style="width:2.5rem;height:2.5rem;">
-                    </span>
-                    <h3>Överför</h3>
-                    <p>Använd insikterna i verkliga situationer.</p>
-                </div>
-            </div>
+{steps}            </div>
         </div>
     </section>''')
 
@@ -299,13 +313,27 @@ def render_sections(sections):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--out', default=None, help='Output directory (default: SRC)')
+    args = parser.parse_args()
+
+    out_dir = Path(args.out).resolve() if args.out else SRC
+
     md_path = SRC / 'site.md'
     if not md_path.exists():
         print(f"Error: {md_path} not found", file=sys.stderr)
         sys.exit(1)
 
     sections = parse_md(md_path.read_text())
+
     body = render_sections(sections)
+
+    css_path = SRC / 'stylesheet.css'
+    css = css_path.read_text() if css_path.exists() else ''
+
+    h = sections.get('header', {})
+    font_url = h.get('font_url', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap')
+    font_family = h.get('font_family', "'Montserrat', sans-serif")
 
     html = f'''<!DOCTYPE html>
 <html lang="sv">
@@ -313,8 +341,11 @@ def main():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schackeffekt – Strategiskt lärande</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="./stylesheet.css" rel="stylesheet"/>
+    <link href="{font_url}" rel="stylesheet">
+    <style>
+{css}
+body {{ font-family: {font_family}; }}
+    </style>
 </head>
 <body>
 
@@ -324,7 +355,7 @@ def main():
 </html>
 '''
 
-    out_path = SRC / 'index.html'
+    out_path = out_dir / 'index.html'
     out_path.write_text(html)
     print(f"Generated {out_path}")
 
