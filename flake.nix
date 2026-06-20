@@ -14,8 +14,9 @@
         site = pkgs.stdenv.mkDerivation {
           name = "schackeffekt";
           src = ./src;
-          buildInputs = with pkgs; [ minify ];
+          buildInputs = with pkgs; [ minify python3 ];
           buildPhase = ''
+            python3 build.py
             mkdir -p "$out"
             minify -o "$out/index.html" index.html
             minify -o "$out/stylesheet.css" stylesheet.css
@@ -26,8 +27,9 @@
 
         buildScript = pkgs.writeShellScriptBin "build" ''
           set -e
-          mkdir -p dist
           cd src
+          python3 build.py
+          mkdir -p ../dist
           ${pkgs.minify}/bin/minify -o ../dist/index.html index.html
           ${pkgs.minify}/bin/minify -o ../dist/stylesheet.css stylesheet.css
           cp -r images ../dist/
