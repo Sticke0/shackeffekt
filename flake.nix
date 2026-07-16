@@ -6,15 +6,24 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
 
         site = pkgs.stdenv.mkDerivation {
           name = "schackeffekt";
           src = ./src;
-          buildInputs = with pkgs; [ minify python3 ];
+          buildInputs = with pkgs; [
+            minify
+            python3
+          ];
           buildPhase = ''
             python3 build.py
             minify -o "$out/index.html" index.html
@@ -56,13 +65,14 @@
 
         packages.default = site;
 
-        apps.default = let
-          devServer = pkgs.writeShellScript "dev-server"
-            "${pkgs.miniserve}/bin/miniserve src -p 8000";
-        in {
-          type = "app";
-          program = "${devServer}";
-        };
+        apps.default =
+          let
+            devServer = pkgs.writeShellScript "dev-server" "${pkgs.miniserve}/bin/miniserve ${site} -p 8000 --index index.html";
+          in
+          {
+            type = "app";
+            program = "${devServer}";
+          };
       }
     );
 }
