@@ -67,7 +67,7 @@
 
         apps.default =
           let
-            devServer = pkgs.writeShellScript "dev-server" "${pkgs.miniserve}/bin/miniserve ${site} -p 8000 --index index.html";
+            devServer = pkgs.writeShellScript "dev-server" "${pkgs.miniserve}/bin/miniserve . -p 8000 --index index.html";
           in
           {
             type = "app";

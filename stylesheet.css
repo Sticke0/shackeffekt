@@ -1,0 +1,540 @@
+:root {
+  --color-primary: #c09950;
+  --text-primary: #fff;
+  --text-dark: #fff;
+  --text-light: #000;
+  --color-light: #f0efee;
+  --color-dark: #000;
+
+  --spacing-xl: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  background-color: white;
+  color: var(--text-light);
+}
+
+header {
+  background-color: var(--color-dark);
+  padding: 20px 0;
+  z-index: 10;
+  text-transform: uppercase;
+}
+
+.hero-active, nav a:hover {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+nav a {
+  color: var(--text-dark);
+  margin-right: 25px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-primary);
+  clip-path: polygon(
+    -5px -5px,
+    100% 0,
+    100% calc(100% - 2px),
+    0% calc(100% - 2px)
+  );
+  transition: clip-path 0.1s linear;
+}
+
+nav .btn {
+  margin-left: 25px;
+  margin-right: -25px;
+  padding-top: 15px!important;
+  padding-bottom: 15px!important;
+  color: var(--text-light);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0% 100%
+  );
+}
+
+/* Hamburger toggle */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: "";
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  top: -8px;
+}
+
+.nav-toggle-label span::after {
+  top: 8px;
+}
+
+#hero {
+  color: var(--text-dark);
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 2.0rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+
+.container h2 {
+  position: relative;
+}
+
+.container h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 50px;
+  height: 1px;
+  background: var(--color-primary);
+  transform: translateX(-50%);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 8px 0;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: filter 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.btn-primary:hover {
+  filter: brightness(85%);
+}
+
+.btn-secondary {
+  border: 1px solid white;
+  color: white;
+}
+
+.btn-secondary:hover {
+  filter: brightness(85%);
+}
+
+section {
+  text-align: center;
+}
+
+.section-bg-dark {
+  background-color: var(--color-dark);
+  color: var(--text-dark);
+}
+
+.section-bg-light {
+  background-color: var(--color-light);
+  color: var(--text-light);
+}
+
+#hero {
+  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  padding-top: 15vh;
+  padding-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 0.2rem;
+  max-width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#hero p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  max-width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#hero .btn-primary {
+  margin-right: 25px;
+}
+
+#what .what-columns {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+#what .what-col {
+  flex: 1;
+}
+
+#what .what-col p {
+  margin-bottom: 1rem;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.program-card {
+  padding-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s;
+  background-color: var(--color-light);
+}
+
+.program-card h3 {
+  padding: 0 10px;
+}
+
+.program-card p {
+  padding: 0 10px;
+  font-size: 0.9rem;
+}
+
+.program-card .image {
+  border-radius: inherit;
+  height: 200px;
+  background-color: black;
+  background-image: url('images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.how-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 40px;
+  position: relative;
+}
+
+.how-step {
+  flex: 1;
+  max-width: 280px;
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.how-step + .how-step::before {
+  content: "\2192";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: 300;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 15px;
+}
+
+.step-icon {
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.how-step h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+}
+
+.how-step p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+#andreas .andreas-content {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+#andreas .andreas-text {
+  flex: 2;
+}
+
+#andreas .andreas-text p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+#andreas .andreas-summary {
+  flex: 1;
+}
+
+#andreas .andreas-summary h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  text-align: left;
+}
+
+#andreas .andreas-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+#andreas .andreas-summary li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+#andreas .andreas-summary li::before {
+  content: "\265F\FE0F ";
+}
+
+/* Footer */
+footer .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===================== */
+/* RESPONSIVE BREAKPOINTS */
+/* ===================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  #hero h1 {
+    font-size: 2.8rem;
+  }
+
+  #hero p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  /* Hamburger visible */
+  .nav-toggle-label {
+    display: block;
+    position: relative;
+    z-index: 20;
+  }
+
+  /* Header flex */
+  header .container {
+    flex-wrap: wrap;
+  }
+
+  /* Nav: hidden by default, slide down on toggle */
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
+    background-color: var(--color-dark);
+  }
+
+  .nav-toggle:checked ~ nav {
+    display: flex;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span {
+    background: transparent;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .nav-toggle:checked ~ .nav-toggle-label span::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+
+  nav a {
+    margin: 0;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    clip-path: none;
+  }
+
+  nav a:hover {
+    clip-path: none;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hero */
+  #hero {
+    padding-top: 10vh;
+    padding-bottom: 2rem;
+  }
+
+  #hero h1 {
+    font-size: 2rem;
+    max-width: 100%;
+  }
+
+  #hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  /* What section */
+  #what .what-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* How steps */
+  .how-steps {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .how-step {
+    max-width: 100%;
+  }
+
+  .how-step + .how-step::before {
+    content: "\2193";
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+  }
+
+  /* Program grid */
+  .program-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Andreas */
+  #andreas .andreas-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Footer */
+  footer .footer-content {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  footer .footer-contact {
+    order: 3;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 12px 16px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  #hero h1 {
+    font-size: 1.6rem;
+  }
+
+  #hero p {
+    font-size: 0.9rem;
+  }
+
+  #hero .btn {
+    display: block;
+    text-align: center;
+    margin: 8px auto;
+  }
+
+  .program-card .image {
+    height: 160px;
+  }
+}

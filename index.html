@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schackeffekt – Strategiskt lärande</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./stylesheet.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <section style="display: flex; flex-direction: row; padding: 0">
+          <span
+            aria-hidden="true"
+            style="font-size: 3rem; padding: 0; margin: 0"
+            >♟️</span
+          >
+          <span
+            style="
+              display: flex;
+              flex-direction: column;
+              padding-left: 0;
+              margin-left: 0;
+            "
+          >
+            <h1 style="font-size: 1.8rem; color: var(--text-dark)">
+              Schackeffekt
+            </h1>
+            <p style="color: var(--color-primary); font-size: 0.8rem">
+              Bättre tänkande – starkare samspel
+            </p>
+          </span>
+        </section>
+        <input
+          type="checkbox"
+          id="nav-toggle"
+          class="nav-toggle"
+          aria-label="Öppna meny"
+        />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+          <span></span>
+        </label>
+        <nav>
+          <a href="#hero" class="hero-active">Hem</a>
+          <a href="#what">Om Schackeffekt</a>
+          <a href="#andreas">Om Andreas</a>
+          <a href="mailto:info@schackeffekt.se">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="hero">
+      <div class="container" style="padding: 0">
+        <h1>
+          Bättre tänkande
+          <span style="color: var(--color-primary)">– Starkare samspel</span>
+        </h1>
+        <p>
+          Vi utvecklar hur människor tänker, samarbetar och fattar beslut - med
+          schack som verktyg
+        </p>
+        <a href="mailto:info@schackeffekt.se" class="btn btn-primary"
+          >Kontakta oss</a
+        >
+      </div>
+    </section>
+
+    <section id="what" class="section-bg-light">
+      <div class="container">
+        <h2>Om Schackeffekt</h2>
+        <div class="what-columns">
+          <div class="what-col">
+            <p>
+              Schackeffekt hjälper skolor, företag, föreningar och
+              privatpersoner att använda schack på ett sätt som utvecklar både
+              människor och grupper. Genom inspirerande aktiviteter, workshops
+              och undervisning används schack ett verktyg för lärande, samarbete
+              och strategiskt tänkande samtidigt som det är engagerande och
+              roligt.
+            </p>
+            <p>
+              Idén till Schackeffekt växte fram under mina många år i skolans
+              värld. Där såg jag gång på gång hur schack gjorde skillnad. Elever
+              som vågade mer, grupper som började samarbeta bättre och människor
+              som upptäckte styrkor hos sig själva som de inte visste att de
+              hade. Jag insåg att det inte bara var schackspelet som gjorde
+              avtryck, utan allt det som hände runt omkring.
+            </p>
+          </div>
+          <div class="what-col">
+            <p>
+              Den erfarenheten är grunden till Schackeffekt. Jag vill ge fler
+              människor möjlighet att ta del av schackets kognitiva och sociala
+              effekter, oavsett om det sker i ett klassrum, på en arbetsplats, i
+              en förening eller genom individuell coaching. Varje uppdrag
+              anpassas efter deltagarnas mål men målet är alltid detsamma. Att
+              skapa en upplevelse som inspirerar, stärker människor och ger
+              verktyg som följer med långt efter att den sista pjäsen har
+              flyttats.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section-bg-dark">
+      <div class="container">
+        <h2>Så fungerar schackeffekt</h2>
+        <div class="how-steps">
+          <div class="how-step">
+            <span class="step-circle" aria-hidden="true"
+              ><span class="step-icon">♟️</span></span
+            >
+            <h3>Upplev</h3>
+            <p>Spela och testa direkt – lär genom att göra.</p>
+          </div>
+          <div class="how-step">
+            <span class="step-circle" aria-hidden="true"
+              ><span class="icon-white"
+                ><img
+                  src="images/brain-white.svg"
+                  alt=""
+                  class="icon-img" /></span
+            ></span>
+            <h3>Reflektera</h3>
+            <p>Förstå hur du tänker och fattar beslut.</p>
+          </div>
+          <div class="how-step">
+            <span class="step-circle" aria-hidden="true"
+              ><span class="icon-white"
+                ><img
+                  src="images/arrows-white.svg"
+                  alt=""
+                  class="icon-img" /></span
+            ></span>
+            <h3>Överför</h3>
+            <p>Använd insikterna i verkliga situationer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="container">
+        <h2>Våra områden</h2>
+        <div class="program-grid">
+          <div class="program-card">
+            <div class="image"></div>
+            <h3>Barn och unga</h3>
+            <p>
+              Schack ger barn och unga möjlighet att utveckla koncentration,
+              problemlösning och tålamod på ett roligt och engagerande sätt.
+              Samtidigt tränas självständigt tänkande, ansvarstagande och
+              förmågan att hantera både medgång och motgång. Målet är att skapa
+              spelglädje och nyfikenhet i en trygg miljö där alla får utvecklas
+              i sin egen takt.
+            </p>
+          </div>
+
+          <div class="program-card">
+            <div class="image"></div>
+            <h3>Seniorverksamhet</h3>
+            <p>
+              Schack är en aktivitet som kombinerar mental stimulans med social
+              gemenskap. För många äldre blir spelet ett sätt att hålla hjärnan
+              aktiv, träffa andra människor och fortsätta utmana sig själv på
+              ett lustfyllt sätt. Samtidigt spelar tidigare erfarenhet ingen
+              roll. Det är aldrig för sent att börja!
+            </p>
+          </div>
+
+          <div class="program-card">
+            <div class="image"></div>
+            <h3>Inkludering och lärande</h3>
+            <p>
+              Schack är en aktivitet där alla kan delta utifrån sina egna
+              förutsättningar. Spelet skapar naturliga möten mellan människor
+              med olika erfarenheter, åldrar och bakgrunder. Samtidigt tränas
+              koncentration, problemlösning och logiskt tänkande i en trygg och
+              respektfull miljö där lärandet står i fokus.
+            </p>
+          </div>
+
+          <div class="program-card">
+            <div class="image"></div>
+            <h3>Företag och ledarskap</h3>
+            <p>
+              Schack är ett kraftfullt verktyg för att utveckla strategiskt
+              tänkande, problemlösning och beslutsfattande. Genom engagerande
+              aktiviteter och workshops får deltagarna träna på att analysera
+              situationer, tänka långsiktigt och fatta genomtänkta beslut under
+              nya förutsättningar. Samtidigt skapas naturliga möjligheter till
+              samarbete, kommunikation och reflektion. Egenskaper som är
+              värdefulla i både ledarskap och arbetsliv.
+            </p>
+          </div>
+
+          <div class="program-card">
+            <div class="image"></div>
+            <h3>Event och samspel</h3>
+            <p>
+              Schack är en rolig aktivitet som för människor samman. Genom
+              gemensamt spel skapas naturliga samtal, skratt och nya möten i en
+              avslappnad miljö. Oavsett om det handlar om ett företagsevent
+              eller en turnering är målet att skapa en positiv upplevelse där
+              alla kan vara med.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="andreas" class="section-bg-light">
+      <div class="container">
+        <h2>Om Andreas</h2>
+        <div class="andreas-content">
+          <div class="andreas-text">
+            <p>Hej!</p>
+            <p>
+              Jag heter Andreas Backman och schack har varit en stor del av mitt
+              liv. Det som började som ett intresse har med tiden blivit både
+              mitt yrke och min passion.
+            </p>
+            <p>
+              Under mer än 15 år har jag arbetat med schack som pedagogiskt
+              verktyg. Genom åren har jag fått se hur schack kan stärka
+              koncentration, problemlösningsförmåga, självförtroende och
+              förmågan att tänka flera steg framåt. Dessa erfarenheter som har
+              format mitt sätt att arbeta och min syn på vad schack kan betyda
+              för människor.
+            </p>
+            <p>
+              Jag tror på att möta varje människa där hon befinner sig. Därför
+              utgår jag alltid från deltagarnas mål, erfarenheter och
+              förutsättningar när jag planerar mina aktiviteter. För mig handlar
+              det inte om att följa en färdig mall, utan om att skapa ett
+              upplägg som passar just den grupp eller person jag har framför
+              mig.
+            </p>
+            <p>
+              Det viktigaste för mig är att skapa en trygg, engagerande och
+              positiv miljö där människor vågar tänka, prova, göra misstag och
+              utvecklas i sin egen takt. Oavsett om jag möter en skolklass, ett
+              företag, en förening eller en privatperson vill jag att varje
+              deltagare ska lämna med ny kunskap, ökad motivation och känslan av
+              att schack är något som både utvecklar och inspirerar.
+            </p>
+          </div>
+          <div class="andreas-summary">
+            <h3>I korthet</h3>
+            <ul>
+              <li>Över 15 års erfarenhet av schack som pedagogiskt verktyg</li>
+              <li>Mästarklasspelare</li>
+              <li>Pedagogikstudier på magisternivå</li>
+              <li>Grundare av Schackeffekt</li>
+              <li>
+                Anpassade aktiviteter och undervisning för individer och grupper
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="section-bg-dark" style="padding: 30px 0">
+      <div class="container footer-content">
+        <section
+          style="
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            align-items: center;
+            gap: 16px;
+          "
+        >
+          <span
+            aria-hidden="true"
+            style="font-size: 2rem; padding: 0; margin: 0"
+            >♟️</span
+          >
+          <span
+            style="
+              display: flex;
+              flex-direction: column;
+              padding-left: 0;
+              margin-left: 0;
+            "
+          >
+            <h1
+              style="
+                font-size: 1.4rem;
+                margin-bottom: 0;
+                color: var(--text-dark);
+              "
+            >
+              Schackeffekt
+            </h1>
+            <p style="color: var(--color-primary); font-size: 0.7rem">
+              Bättre tänkande – starkare samspel
+            </p>
+          </span>
+        </section>
+        <div
+          class="footer-contact"
+          style="color: var(--text-dark); font-size: 0.9rem; text-align: center"
+        >
+          <p style="margin-bottom: 4px">info@schackeffekt.se</p>
+          <p>073 94 02 900</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
