@@ -132,8 +132,7 @@ def render_sections(sections):
         <div class="container" style="padding: 0;">
           <h1>{title}</h1>
           <p>{subtitle}</p>
-          <a href="mailto:{email}" class="btn btn-primary">{btn1}</a>
-          <a href="#program" class="btn btn-secondary">{btn2}</a>
+          <a href="mailto:{email}" class="btn btn-primary">{btn1}</a>{f'          <a href="#program" class="btn btn-secondary">{btn2}</a>' if btn2 else ''}
         </div>
     </section>''')
 
@@ -153,6 +152,31 @@ def render_sections(sections):
               {body}
             </div>
           </div>
+        </div>
+    </section>''')
+
+    if 'how' in sections:
+        d = sections['how']
+        heading = d.get('heading', 'Så fungerar schackeffekt')
+        steps = ''
+        for i, item in enumerate(d.get('items', [])):
+            if isinstance(item, dict):
+                icon = item.get('icon', '')
+                title = item.get('title', '')
+                desc = item.get('desc', '')
+            else:
+                icon = title = desc = ''
+            steps += f'''                <div class="how-step">
+                    <span class="step-circle" aria-hidden="true">{render_icon(icon)}</span>
+                    <h3>{title}</h3>
+                    <p>{desc}</p>
+                </div>
+'''
+        out.append(f'''    <section id="how" class="section-bg-dark">
+        <div class="container">
+            <h2>{heading}</h2>
+            <div class="how-steps">
+{steps}            </div>
         </div>
     </section>''')
 
@@ -181,31 +205,6 @@ def render_sections(sections):
             <h2>{heading}</h2>
             <div class="program-grid">
 {cards}            </div>
-        </div>
-    </section>''')
-
-    if 'how' in sections:
-        d = sections['how']
-        heading = d.get('heading', 'Så fungerar schackeffekt')
-        steps = ''
-        for i, item in enumerate(d.get('items', [])):
-            if isinstance(item, dict):
-                icon = item.get('icon', '')
-                title = item.get('title', '')
-                desc = item.get('desc', '')
-            else:
-                icon = title = desc = ''
-            steps += f'''                <div class="how-step">
-                    <span class="step-circle" aria-hidden="true">{render_icon(icon)}</span>
-                    <h3>{title}</h3>
-                    <p>{desc}</p>
-                </div>
-'''
-        out.append(f'''    <section id="how" class="section-bg-dark">
-        <div class="container">
-            <h2>{heading}</h2>
-            <div class="how-steps">
-{steps}            </div>
         </div>
     </section>''')
 

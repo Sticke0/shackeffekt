@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schackeffekt – Strategiskt lärande</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+:root {
+  --color-primary: #c09950;
+  --text-primary: #fff;
+  --text-dark: #fff;
+  --text-light: #000;
+  --color-light: #f0efee;
+  --color-dark: #000;
+
+  --spacing-xl: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  background-color: white;
+  color: var(--text-light);
+}
+
+header {
+  background-color: var(--color-dark);
+  padding: 20px 0;
+  z-index: 10;
+
+  text-transform: uppercase;
+}
+
+.hero-active, nav a:hover {
+  /* Clip-path spanning the entire box so it's no longer hiding the full-width border. */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+nav a {
+  color: var(--text-dark);
+  margin-right: 25px;
+  padding-bottom: 10px;
+  text-decoration: none;
+
+  border-bottom: 2px solid var(--color-primary);
+
+  clip-path: polygon( 
+    -5px -5px, /* top left */
+    100% 0, /* top right */
+    100% calc(100% - 2px), /* bottom right */
+    0% calc(100% - 2px) /* bottom left */
+  );
+  transition: clip-path 0.1s linear;
+}
+
+nav .btn {
+  margin-left: 25px;
+  margin-right: -25px;
+  padding-top: 15px!important;
+  padding-bottom: 15px!important;
+
+  color: var(--text-light);
+  clip-path: polygon( 
+    0 0, /* top left */
+    100% 0, /* top right */
+    100% 100%, /* bottom right */
+    0% 100% /* bottom left */
+  );
+}
+
+#hero {
+  color: var(--text-dark)
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 2.0rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+
+.container h2 {
+  position: relative;
+}
+
+.container h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: 50px;
+  height: 1px;
+
+  background: var(--color-primary);
+
+  transform: translateX(-50%);
+}
+
+h2.h2-underline-left::after {
+  left: 0;
+  transform: none;
+}
+
+h2.h2-no-underline::after {
+  display: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 8px 0;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: filter 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--text-primary);
+}
+.btn-primary:hover {
+  filter: brightness(85%);
+}
+.btn-secondary {
+  border: 1px solid white;
+  color: white;
+}
+.btn-secondary:hover {
+  filter: brightness(85%);
+}
+
+section {
+  /* padding: var(--spacing-xl) 0; */
+  text-align: center;
+}
+
+.section-bg-dark {
+  background-color: var(--color-dark);
+  color: var(--text-dark);
+}
+
+.section-bg-light {
+  background-color: var(--color-light);
+  color: var(--text-light);
+}
+
+#hero {
+  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  /* color: white; */
+  padding-top: 15vh;
+  padding-bottom: 2rem;
+  /* min-height: 70vh; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+#hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 0.2rem;
+
+  max-width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#hero p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  max-width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#hero .btn-primary {
+  margin-right: 25px;
+}
+
+#what .what-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#what .what-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  padding: 10px 20px;
+}
+
+#what .what-heading h2 {
+  margin-bottom: 0;
+  font-size: 1.7rem;
+  text-align: left;
+}
+
+.what-divider {
+  width: 1px;
+  background: #ccc;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin: 0;
+  border: none;
+}
+
+#what .what-body {
+  flex: 1;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+#program {
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.program-card {
+  padding-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s;
+  background-color: var(--color-light);
+
+  h3 {
+    padding: 0 10px;
+  }
+
+  p {
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  .image {
+    border-radius: inherit;
+    height: 200px;
+    background-color: black;
+    margin-bottom: 10px;
+  }
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+#how {
+}
+
+.how-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  position: relative;
+}
+
+.how-step {
+  width: 280px;
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+  margin: 0 30px;
+}
+
+.how-step + .how-step::before {
+  content: "→";
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: var(--color-primary);
+  font-weight: 300;
+}
+
+.step-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.step-icon {
+  filter: brightness(0) invert(1);
+}
+
+.how-step h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.how-step:nth-child(1) .step-circle {
+  background-color: #2E7D32;
+  border-color: #66BB6A;
+}
+.how-step:nth-child(1) h3 {
+  color: #2E7D32;
+}
+
+.how-step:nth-child(2) .step-circle {
+  background-color: #6A1B9A;
+  border-color: #CE93D8;
+}
+.how-step:nth-child(2) h3 {
+  color: #6A1B9A;
+}
+
+.how-step:nth-child(3) .step-circle {
+  background-color: #8B6914;
+  border-color: #D4AF37;
+}
+.how-step:nth-child(3) h3 {
+  color: #8B6914;
+}
+
+.how-step p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.reviews-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.review-quote {
+  flex: 1;
+}
+
+.review-divider {
+  width: 1px;
+  background: #666;
+  margin: 0 24px;
+  align-self: stretch;
+}
+
+.review-quote::before {
+  content: "\201C";
+  display: block;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  line-height: 0.6;
+  margin-bottom: 4px;
+}
+
+.review-quote p {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+#cta {
+  background-color: var(--color-primary);
+  color: var(--text-light);
+}
+
+#cta .container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#cta .cta-row {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#cta .brand-text h2 {
+  margin-bottom: 2px;
+}
+
+#cta .cta-sub {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #000;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cta-icon span {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .program-grid, .how-steps {
+    flex-direction: column;
+  }
+  .how-steps {
+    gap: 20px;
+  }
+  .how-step {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  #hero h1 {
+    font-size: 2.5rem;
+    max-width: 85%;
+  }
+  #hero p {
+    font-size: 1.1rem;
+    max-width: 80%;
+  }
+  .program-card {
+    flex: 1 1 100%;
+  }
+  .how-step {
+    max-width: 100%;
+  }
+  .how-step + .how-step::before {
+    content: "↓";
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+  .split-section .split-section-body {
+    flex-direction: column;
+  }
+  #reviews .split-section-text {
+    padding: 30px 20px !important;
+  }
+  .split-section-image {
+    min-height: 250px;
+  }
+  .reviews-row {
+    flex-direction: column;
+  }
+  .review-divider {
+    width: auto;
+    height: 1px;
+    margin: 16px 0;
+    align-self: stretch;
+  }
+  .split-section-text-inner {
+    width: 80%;
+  }
+  header .container.flex-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  #cta .cta-row.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  footer .container.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  footer .brand {
+    justify-content: center;
+  }
+  #what .what-row {
+    flex-direction: column;
+  }
+  #what .what-heading {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .what-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+    margin: 0.5rem 0;
+  }
+  #what .what-body {
+    width: 100%;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 15px;
+  }
+  #hero h1 {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+  #hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  #hero {
+    padding-top: 10vh;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .step-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  .program-grid {
+    grid-template-columns: 1fr;
+  }
+  nav a {
+    margin-right: 12px;
+    font-size: 0.8rem;
+  }
+  nav .btn {
+    margin-left: 12px;
+    margin-right: 0;
+    padding: 8px 14px !important;
+    font-size: 0.8rem;
+  }
+  #cta .brand-text h2 {
+    font-size: 1.2rem;
+  }
+  .cta-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .cta-icon span {
+    font-size: 1.5rem;
+  }
+}
+
+/* Shared utilities */
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.icon-white {
+  filter: brightness(0) invert(1);
+}
+
+.icon-img {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.btn-dark {
+  background: #000;
+  color: #fff;
+  flex-shrink: 0;
+}
+.btn-dark:hover {
+  filter: brightness(150%);
+}
+
+/* Split image/text layout */
+.split-section .container {
+  max-width: unset;
+  padding: 0;
+}
+
+.split-section-body {
+  display: flex;
+  align-items: stretch;
+  text-align: left;
+}
+
+.split-section-text {
+  padding: 30px 0;
+}
+
+.split-section-text-inner {
+  margin: 0 auto;
+  width: 55%;
+}
+
+.split-section-image {
+  position: relative;
+  min-height: 200px;
+}
+
+.split-section-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+body { font-family: 'Montserrat', sans-serif; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container flex-row">
+          <section class="brand">
+            <span aria-hidden="true" style="font-size: 3rem; padding: 0; margin: 0;">♟️</span>
+            <span class="brand-text">
+              <h1 style="font-size: 1.8rem; color: var(--text-dark);">Schackeffekt</h1>
+              <p style="color: var(--color-primary); font-size: 0.8rem;">Bättre tänkande – starkare samspel</p>
+            </span>
+          </section>
+            <nav>
+                <a href="#" class="hero-active">Hem</a>
+                <a href="mailto:info@schackeffekt.se">Kontakt</a>
+                <a href="#how" style="padding: 8px 20px;">Om Schackeffekt</a>
+                <a href="#andreas" style="padding: 8px 20px;">Om Andreas</a>
+            </nav>
+        </div>
+    </header>
+    <section id="hero">
+        <div class="container" style="padding: 0;">
+          <h1>Bättre tänkande
+            <span style="color: var(--color-primary)">Starkare samspel</span></h1>
+          <p>Vi utvecklar hur människor tänker, samarbetar och fattar beslut - med schack som verktyg</p>
+          <a href="mailto:info@schackeffekt.se" class="btn btn-primary">Kontakta oss</a>
+        </div>
+    </section>
+    <section id="what" class="section-bg-light">
+        <div class="container">
+          <div class="what-row">
+            <div class="what-heading">
+              <span aria-hidden="true" style="font-size: 3rem;">♟️</span>
+              <h2 class="h2-no-underline" style="margin-left: 0.5rem;">Om Schackeffekt</h2>
+            </div>
+            <div class="what-divider"></div>
+            <div class="what-body">
+              <p>Schackeffekt hjälper skolor, företag, föreningar och privatpersoner att använda schack på ett sätt som utvecklar både människor och grupper. Genom inspirerande aktiviteter, workshops och undervisning används schack ett verktyg för lärande, samarbete och strategiskt tänkande samtidigt som det är engagerande och roligt.<br>
+Idén till Schackeffekt växte fram under mina många år i skolans värld. Där såg jag gång på gång hur schack gjorde skillnad. Elever som vågade mer, grupper som började samarbeta bättre och människor som upptäckte styrkor hos sig själva som de inte visste att de hade. Jag insåg att det inte bara var schackspelet som gjorde avtryck, utan allt det som hände runt omkring.<br>
+Den erfarenheten är grunden till Schackeffekt. Jag vill ge fler människor möjlighet att ta del av schackets kognitiva och sociala effekter, oavsett om det sker i ett klassrum, på en arbetsplats, i en förening eller genom individuell coaching. Varje uppdrag anpassas efter deltagarnas mål men målet är alltid detsamma. Att skapa en upplevelse som inspirerar, stärker människor och ger verktyg som följer med långt efter att den sista pjäsen har flyttats.</p>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section id="how" class="section-bg-dark">
+        <div class="container">
+            <h2>Så fungerar schackeffekt</h2>
+            <div class="how-steps">
+                <div class="how-step">
+                    <span class="step-circle" aria-hidden="true"><span class="step-icon">♟️</span></span>
+                    <h3>Upplev</h3>
+                    <p>Spela och testa direkt. Lär genom att göra.</p>
+                </div>
+                <div class="how-step">
+                    <span class="step-circle" aria-hidden="true"><span class="icon-white"><img src="images/brain-white.svg" alt="" class="icon-img"></span></span>
+                    <h3>Reflektera</h3>
+                    <p>Förstå hur du tänker och fattar beslut.</p>
+                </div>
+                <div class="how-step">
+                    <span class="step-circle" aria-hidden="true"><span class="icon-white"><img src="images/arrows-white.svg" alt="" class="icon-img"></span></span>
+                    <h3>Överför</h3>
+                    <p>Använd insikterna i verkliga situationer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="program">
+        <div class="container">
+            <h2>Våra områden</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <div class="image" style="background-image:url('images/hero-bg.jpg');background-size:cover;background-position:center"></div>
+                    <h3>Barn och unga</h3>
+                    <p>Schack ger barn och unga möjlighet att utveckla koncentration, problemlösning och tålamod på ett roligt och engagerande sätt. Samtidigt tränas självständigt tänkande, ansvarstagande och förmågan att hantera både medgång och motgång. Målet är att skapa spelglädje och nyfikenhet i en trygg miljö där alla får utvecklas i sin egen takt.</p>
+                </div>
+                <div class="program-card">
+                    <div class="image"></div>
+                    <h3>Seniorverksamhet</h3>
+                    <p>Schack är en aktivitet som kombinerar mental stimulans med social gemenskap. För många äldre blir spelet ett sätt att hålla hjärnan aktiv, träffa andra människor och fortsätta utmana sig själv på ett lustfyllt sätt. Samtidigt spelar tidigare erfarenhet ingen roll. Det är aldrig för sent att börja!</p>
+                </div>
+                <div class="program-card">
+                    <div class="image"></div>
+                    <h3>Inkludering och lärande</h3>
+                    <p>Schack är en aktivitet där alla kan delta utifrån sina egna förutsättningar. Spelet skapar naturliga möten mellan människor med olika erfarenheter, åldrar och bakgrunder. Samtidigt tränas koncentration, problemlösning och logiskt tänkande i en trygg och respektfull miljö där lärandet står i fokus.</p>
+                </div>
+                <div class="program-card">
+                    <div class="image"></div>
+                    <h3>Företag och ledarskap</h3>
+                    <p>Schack är ett kraftfullt verktyg för att utveckla strategiskt tänkande, problemlösning och beslutsfattande. Genom engagerande aktiviteter och workshops får deltagarna träna på att analysera situationer, tänka långsiktigt och fatta genomtänkta beslut under nya förutsättningar. Samtidigt skapas naturliga möjligheter till samarbete, kommunikation och reflektion. Egenskaper som är värdefulla i både ledarskap och arbetsliv.</p>
+                </div>
+                <div class="program-card">
+                    <div class="image"></div>
+                    <h3>Event och samspel</h3>
+                    <p>Schack är en rolig aktivitet som för människor samman. Genom gemensamt spel skapas naturliga samtal, skratt och nya möten i en avslappnad miljö. Oavsett om det handlar om ett företagsevent eller en turnering är målet att skapa en positiv upplevelse där alla kan vara med.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="section-bg-dark" style="padding: 30px 0;">
+        <div class="container flex-row">
+            <section class="brand">
+                <span aria-hidden="true" style="font-size: 2rem; padding: 0; margin: 0;">♟️</span>
+                <span class="brand-text">
+                    <h1 style="font-size: 1.4rem; margin-bottom: 0;">Schackeffekt</h1>
+                    <p style="color: var(--color-primary); font-size: 0.7rem;">Bättre tänkande – starkare samspel</p>
+                </span>
+            </section>
+            <div style="color: var(--text-dark); font-size: 0.9rem; text-align: center;">
+                <p style="margin-bottom: 4px;">info@schackeffekt.se</p>
+                <p>073 94 02 900</p>
+            </div>
+            <div style="display: flex; gap: 16px;">
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
