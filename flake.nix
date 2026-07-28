@@ -19,13 +19,21 @@
 
         site = pkgs.stdenv.mkDerivation {
           name = "schackeffekt";
-          src = ./src;
-          buildInputs = with pkgs; [
-            minify
-            python3
-          ];
+          src = pkgs.lib.cleanSourceWith {
+            src = ./.;
+            filter =
+              path: type:
+              let
+                base = builtins.baseNameOf path;
+              in
+              !(pkgs.lib.hasPrefix "." base)
+              && base != "result"
+              && base != "flake.nix"
+              && base != "flake.lock";
+          };
+          buildInputs = with pkgs; [ minify ];
           buildPhase = ''
-            python3 build.py
+            mkdir -p "$out"
             minify -o "$out/index.html" index.html
             minify -o "$out/stylesheet.css" stylesheet.css
             cp -r images "$out/"
@@ -35,10 +43,10 @@
 
         buildScript = pkgs.writeShellScriptBin "build" ''
           set -e
-          python3 src/build.py --out dist
-          ${pkgs.minify}/bin/minify -o dist/index.html dist/index.html
-          ${pkgs.minify}/bin/minify -o dist/stylesheet.css src/stylesheet.css
-          cp -r src/images dist/
+          mkdir -p dist
+          ${pkgs.minify}/bin/minify -o dist/index.html index.html
+          ${pkgs.minify}/bin/minify -o dist/stylesheet.css stylesheet.css
+          cp -r images dist/
           echo "Built to ./dist/"
         '';
       in
@@ -47,9 +55,7 @@
           packages = with pkgs; [
             miniserve
             minify
-            python3
             entr
-            nixpkgs-fmt
             buildScript
           ];
 

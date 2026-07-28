@@ -5,7 +5,6 @@
   --text-light: #000;
   --color-light: #f0efee;
   --color-dark: #000;
-
   --spacing-xl: 4rem;
 }
 
@@ -16,9 +15,9 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: 1.6;
-  background-color: white;
+  background-color: #fff;
   color: var(--text-light);
 }
 
@@ -29,7 +28,8 @@ header {
   text-transform: uppercase;
 }
 
-.hero-active, nav a:hover {
+.hero-active,
+nav a:hover {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -51,52 +51,10 @@ nav a {
 nav .btn {
   margin-left: 25px;
   margin-right: -25px;
-  padding-top: 15px!important;
-  padding-bottom: 15px!important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
   color: var(--text-light);
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 100%,
-    0% 100%
-  );
-}
-
-/* Hamburger toggle */
-.nav-toggle {
-  display: none;
-}
-
-.nav-toggle-label {
-  display: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  width: 28px;
-  height: 3px;
-  background: var(--text-primary);
-  border-radius: 2px;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: "";
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  top: -8px;
-}
-
-.nav-toggle-label span::after {
-  top: 8px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 #hero {
@@ -109,7 +67,7 @@ h1 {
 
 h2 {
   text-transform: uppercase;
-  font-size: 2.0rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -139,6 +97,15 @@ h3 {
   transform: translateX(-50%);
 }
 
+h2.h2-underline-left::after {
+  left: 0;
+  transform: none;
+}
+
+h2.h2-no-underline::after {
+  display: none;
+}
+
 .btn {
   display: inline-block;
   padding: 12px 25px;
@@ -161,8 +128,8 @@ h3 {
 }
 
 .btn-secondary {
-  border: 1px solid white;
-  color: white;
+  border: 1px solid #fff;
+  color: #fff;
 }
 
 .btn-secondary:hover {
@@ -184,7 +151,7 @@ section {
 }
 
 #hero {
-  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  background: url("images/hero-bg.jpg") 50% / cover no-repeat;
   padding-top: 15vh;
   padding-bottom: 2rem;
   display: flex;
@@ -213,20 +180,46 @@ section {
   margin-right: 25px;
 }
 
-#what .what-columns {
+#what .what-content {
   display: flex;
   gap: 40px;
   margin-top: 20px;
   text-align: left;
-  font-size: 1.1rem;
 }
 
-#what .what-col {
+#what .what-text {
+  flex: 2;
+}
+
+#what .what-text p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+#what .what-summary {
   flex: 1;
 }
 
-#what .what-col p {
+#what .what-summary h3 {
+  font-size: 1.2rem;
   margin-bottom: 1rem;
+  color: var(--color-primary);
+  text-align: left;
+}
+
+#what .what-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+#what .what-summary li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+#what .what-summary li::before {
+  content: "\265F\FE0F ";
 }
 
 .program-grid {
@@ -257,70 +250,89 @@ section {
 .program-card .image {
   border-radius: inherit;
   height: 200px;
-  background-color: black;
-  background-image: url('images/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
+  background-color: #000;
   margin-bottom: 10px;
 }
 
 .program-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .how-steps {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 0;
+  flex-wrap: wrap;
   margin-top: 40px;
   position: relative;
 }
 
 .how-step {
-  flex: 1;
-  max-width: 280px;
+  width: 280px;
   text-align: center;
   padding: 30px 20px;
   position: relative;
+  margin: 0 30px;
 }
 
 .how-step + .how-step::before {
   content: "\2192";
   position: absolute;
-  left: -10px;
+  left: -30px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--color-primary);
   font-weight: 300;
 }
 
-.step-number {
+.step-circle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   border: 2px solid var(--color-primary);
   border-radius: 50%;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 .step-icon {
-  display: block;
-  font-size: 3rem;
-  margin-bottom: 10px;
+  filter: brightness(0) invert(1);
 }
 
 .how-step h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: var(--color-primary);
+}
+
+.how-step:nth-child(1) .step-circle {
+  background-color: #2e7d32;
+  border-color: #66bb6a;
+}
+
+.how-step:nth-child(1) h3 {
+  color: #2e7d32;
+}
+
+.how-step:nth-child(2) .step-circle {
+  background-color: #6a1b9a;
+  border-color: #ce93d8;
+}
+
+.how-step:nth-child(2) h3 {
+  color: #6a1b9a;
+}
+
+.how-step:nth-child(3) .step-circle {
+  background-color: #8b6914;
+  border-color: #d4af37;
+}
+
+.how-step:nth-child(3) h3 {
+  color: #8b6914;
 }
 
 .how-step p {
@@ -328,6 +340,327 @@ section {
   line-height: 1.5;
   opacity: 0.85;
 }
+
+.reviews-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.review-quote {
+  flex: 1;
+}
+
+.review-divider {
+  width: 1px;
+  background: #666;
+  margin: 0 24px;
+  align-self: stretch;
+}
+
+.review-quote::before {
+  content: "\201C";
+  display: block;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  line-height: 0.6;
+  margin-bottom: 4px;
+}
+
+.review-quote p {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+#cta {
+  background-color: var(--color-primary);
+  color: var(--text-light);
+}
+
+#cta .container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#cta .cta-row {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#cta .brand-text h2 {
+  margin-bottom: 2px;
+}
+
+#cta .cta-sub {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #000;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cta-icon span {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ===================== */
+/* RESPONSIVE BREAKPOINTS */
+/* ===================== */
+
+@media (max-width: 900px) {
+  .program-grid,
+  .how-steps {
+    flex-direction: column;
+  }
+
+  .how-steps {
+    gap: 20px;
+  }
+
+  .how-step {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #hero h1 {
+    font-size: 2.5rem;
+    max-width: 85%;
+  }
+
+  #hero p {
+    font-size: 1.1rem;
+    max-width: 80%;
+  }
+
+  .program-card {
+    flex: 1 1 100%;
+  }
+
+  .how-step + .how-step::before {
+    content: "\2193";
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
+
+  .split-section .split-section-body {
+    flex-direction: column;
+  }
+
+  #reviews .split-section-text {
+    padding: 30px 20px !important;
+  }
+
+  .split-section-image {
+    min-height: 250px;
+  }
+
+  .reviews-row {
+    flex-direction: column;
+  }
+
+  .review-divider {
+    width: auto;
+    height: 1px;
+    margin: 16px 0;
+    align-self: stretch;
+  }
+
+  .split-section-text-inner {
+    width: 80%;
+  }
+
+  header .container.flex-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #cta .cta-row.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  footer .container.flex-row {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  footer .brand {
+    justify-content: center;
+  }
+
+  #what .what-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #andreas .andreas-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px 15px;
+  }
+
+  #hero h1 {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+
+  #hero p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  #hero {
+    padding-top: 10vh;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .step-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .program-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav a {
+    margin-right: 12px;
+    font-size: 0.8rem;
+  }
+
+  nav .btn {
+    margin-left: 12px;
+    margin-right: 0;
+    padding: 8px 14px !important;
+    font-size: 0.8rem;
+  }
+
+  #cta .brand-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .cta-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cta-icon span {
+    font-size: 1.5rem;
+  }
+
+  .program-card .image {
+    height: 160px;
+  }
+}
+
+/* ===================== */
+/* UTILITY CLASSES        */
+/* ===================== */
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.icon-white {
+  filter: brightness(0) invert(1);
+}
+
+.icon-img {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.btn-dark {
+  background: #000;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.btn-dark:hover {
+  filter: brightness(150%);
+}
+
+/* ===================== */
+/* SPLIT SECTION          */
+/* ===================== */
+
+.split-section .container {
+  max-width: unset;
+  padding: 0;
+}
+
+.split-section-body {
+  display: flex;
+  align-items: stretch;
+  text-align: left;
+}
+
+.split-section-text {
+  padding: 30px 0;
+}
+
+.split-section-text-inner {
+  margin: 0 auto;
+  width: 55%;
+}
+
+.split-section-image {
+  position: relative;
+  min-height: 200px;
+}
+
+.split-section-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===================== */
+/* ANDREAS SECTION        */
+/* ===================== */
 
 #andreas .andreas-content {
   display: flex;
@@ -369,172 +702,4 @@ section {
 
 #andreas .andreas-summary li::before {
   content: "\265F\FE0F ";
-}
-
-/* Footer */
-footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ===================== */
-/* RESPONSIVE BREAKPOINTS */
-/* ===================== */
-
-/* Tablet */
-@media (max-width: 1024px) {
-  #hero h1 {
-    font-size: 2.8rem;
-  }
-
-  #hero p {
-    font-size: 1.2rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  /* Hamburger visible */
-  .nav-toggle-label {
-    display: block;
-    position: relative;
-    z-index: 20;
-  }
-
-  /* Header flex */
-  header .container {
-    flex-wrap: wrap;
-  }
-
-  /* Nav: hidden by default, slide down on toggle */
-  nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    padding: 10px 0;
-    background-color: var(--color-dark);
-  }
-
-  .nav-toggle:checked ~ nav {
-    display: flex;
-  }
-
-  .nav-toggle:checked ~ .nav-toggle-label span {
-    background: transparent;
-  }
-
-  .nav-toggle:checked ~ .nav-toggle-label span::before {
-    transform: rotate(45deg);
-    top: 0;
-  }
-
-  .nav-toggle:checked ~ .nav-toggle-label span::after {
-    transform: rotate(-45deg);
-    top: 0;
-  }
-
-  nav a {
-    margin: 0;
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0;
-    clip-path: none;
-  }
-
-  nav a:hover {
-    clip-path: none;
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Hero */
-  #hero {
-    padding-top: 10vh;
-    padding-bottom: 2rem;
-  }
-
-  #hero h1 {
-    font-size: 2rem;
-    max-width: 100%;
-  }
-
-  #hero p {
-    font-size: 1rem;
-    max-width: 100%;
-  }
-
-  /* What section */
-  #what .what-columns {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  /* How steps */
-  .how-steps {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .how-step {
-    max-width: 100%;
-  }
-
-  .how-step + .how-step::before {
-    content: "\2193";
-    left: 50%;
-    top: -20px;
-    transform: translateX(-50%);
-  }
-
-  /* Program grid */
-  .program-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  /* Andreas */
-  #andreas .andreas-content {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  /* Footer */
-  footer .footer-content {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
-
-  footer .footer-contact {
-    order: 3;
-  }
-}
-
-/* Small phones */
-@media (max-width: 480px) {
-  .container {
-    padding: 12px 16px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  #hero h1 {
-    font-size: 1.6rem;
-  }
-
-  #hero p {
-    font-size: 0.9rem;
-  }
-
-  #hero .btn {
-    display: block;
-    text-align: center;
-    margin: 8px auto;
-  }
-
-  .program-card .image {
-    height: 160px;
-  }
 }

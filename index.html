@@ -12,28 +12,14 @@
   </head>
   <body>
     <header>
-      <div
-        class="container"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <section style="display: flex; flex-direction: row; padding: 0">
+      <div class="container flex-row">
+        <section class="brand">
           <span
             aria-hidden="true"
             style="font-size: 3rem; padding: 0; margin: 0"
             >♟️</span
           >
-          <span
-            style="
-              display: flex;
-              flex-direction: column;
-              padding-left: 0;
-              margin-left: 0;
-            "
-          >
+          <span class="brand-text">
             <h1 style="font-size: 1.8rem; color: var(--text-dark)">
               Schackeffekt
             </h1>
@@ -42,15 +28,6 @@
             </p>
           </span>
         </section>
-        <input
-          type="checkbox"
-          id="nav-toggle"
-          class="nav-toggle"
-          aria-label="Öppna meny"
-        />
-        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
-          <span></span>
-        </label>
         <nav>
           <a href="#hero" class="hero-active">Hem</a>
           <a href="#what">Om Schackeffekt</a>
@@ -64,7 +41,7 @@
       <div class="container" style="padding: 0">
         <h1>
           Bättre tänkande
-          <span style="color: var(--color-primary)">– Starkare samspel</span>
+          <span style="color: var(--color-primary)">Starkare samspel</span>
         </h1>
         <p>
           Vi utvecklar hur människor tänker, samarbetar och fattar beslut - med
@@ -79,8 +56,8 @@
     <section id="what" class="section-bg-light">
       <div class="container">
         <h2>Om Schackeffekt</h2>
-        <div class="what-columns">
-          <div class="what-col">
+        <div class="what-content">
+          <div class="what-text">
             <p>
               Schackeffekt hjälper skolor, företag, föreningar och
               privatpersoner att använda schack på ett sätt som utvecklar både
@@ -97,8 +74,6 @@
               hade. Jag insåg att det inte bara var schackspelet som gjorde
               avtryck, utan allt det som hände runt omkring.
             </p>
-          </div>
-          <div class="what-col">
             <p>
               Den erfarenheten är grunden till Schackeffekt. Jag vill ge fler
               människor möjlighet att ta del av schackets kognitiva och sociala
@@ -274,29 +249,14 @@
     </section>
 
     <footer class="section-bg-dark" style="padding: 30px 0">
-      <div class="container footer-content">
-        <section
-          style="
-            display: flex;
-            flex-direction: row;
-            padding: 0;
-            align-items: center;
-            gap: 16px;
-          "
-        >
+      <div class="container flex-row">
+        <section class="brand">
           <span
             aria-hidden="true"
             style="font-size: 2rem; padding: 0; margin: 0"
             >♟️</span
           >
-          <span
-            style="
-              display: flex;
-              flex-direction: column;
-              padding-left: 0;
-              margin-left: 0;
-            "
-          >
+          <span class="brand-text">
             <h1
               style="
                 font-size: 1.4rem;
@@ -312,7 +272,6 @@
           </span>
         </section>
         <div
-          class="footer-contact"
           style="color: var(--text-dark); font-size: 0.9rem; text-align: center"
         >
           <p style="margin-bottom: 4px">info@schackeffekt.se</p>
