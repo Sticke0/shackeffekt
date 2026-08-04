@@ -19,6 +19,9 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -26,6 +29,8 @@ header {
   padding: 20px 0;
   z-index: 10;
   text-transform: uppercase;
+  position: sticky;
+  top: 0;
 }
 
 .hero-active,
@@ -138,6 +143,7 @@ h2.h2-no-underline::after {
 
 section {
   text-align: center;
+  flex: 1;
 }
 
 .section-bg-dark {
@@ -151,18 +157,18 @@ section {
 }
 
 #hero {
-  background: url("images/hero-bg.jpg") 50% / cover no-repeat;
-  padding-top: 15vh;
-  padding-bottom: 2rem;
+  background: url("images/hero-bg.png") center 60% / cover no-repeat;
+  padding-top: 5vh;
+  padding-bottom: 4rem;
+  min-height: 80vh;
   display: flex;
-  align-items: center;
   justify-content: center;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #hero h1 {
   font-size: 3.5rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 35vh;
   max-width: 65%;
   margin-left: auto;
   margin-right: auto;
@@ -180,53 +186,19 @@ section {
   margin-right: 25px;
 }
 
-#what .what-content {
-  display: flex;
-  gap: 40px;
-  margin-top: 20px;
-  text-align: left;
-}
-
-#what .what-text {
-  flex: 2;
-}
-
-#what .what-text p {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-}
-
-#what .what-summary {
-  flex: 1;
-}
-
-#what .what-summary h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--color-primary);
-  text-align: left;
-}
-
-#what .what-summary ul {
-  list-style: none;
-  padding: 0;
-}
-
-#what .what-summary li {
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd;
-  font-size: 0.95rem;
-}
-
-#what .what-summary li::before {
-  content: "\265F\FE0F ";
-}
-
 .program-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 30px;
   margin-top: 30px;
+}
+
+.program-card:nth-child(-n + 3) {
+  grid-column: span 2;
+}
+
+.program-card:nth-child(n + 4) {
+  grid-column: span 3;
 }
 
 .program-card {
@@ -247,11 +219,23 @@ section {
   font-size: 0.9rem;
 }
 
+.program-card .card-text {
+  display: none;
+}
+
 .program-card .image {
   border-radius: inherit;
   height: 200px;
   background-color: #000;
   margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.program-card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .program-card:hover {
@@ -437,11 +421,27 @@ section {
   #hero h1 {
     font-size: 2.5rem;
     max-width: 85%;
+    margin-bottom: 0.2rem;
   }
 
   #hero p {
     font-size: 1.1rem;
     max-width: 80%;
+  }
+
+  #hero {
+    background: url("images/hero-bg.png") center 60% / cover no-repeat;
+    min-height: 0;
+    padding: 40px 0;
+  }
+
+  .program-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .program-card:nth-child(-n + 3),
+  .program-card:nth-child(n + 4) {
+    grid-column: span 1;
   }
 
   .program-card {
@@ -503,21 +503,17 @@ section {
   footer .brand {
     justify-content: center;
   }
-
-  #what .what-content {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  #andreas .andreas-content {
-    flex-direction: column;
-    gap: 20px;
-  }
 }
 
 @media (max-width: 480px) {
   .container {
     padding: 10px 15px;
+  }
+
+  #hero {
+    min-height: 0;
+    padding: 30px 0;
+    background: url("images/hero-bg.png") center 60% / cover no-repeat;
   }
 
   #hero h1 {
@@ -528,10 +524,6 @@ section {
   #hero p {
     font-size: 1rem;
     max-width: 100%;
-  }
-
-  #hero {
-    padding-top: 10vh;
   }
 
   h2 {
@@ -659,47 +651,187 @@ section {
 }
 
 /* ===================== */
-/* ANDREAS SECTION        */
+/* SUB-PAGES             */
 /* ===================== */
 
-#andreas .andreas-content {
+#sub-page {
+  padding: 60px 0;
+  flex: 1;
+}
+
+#sub-page .container {
+  max-width: 900px;
+}
+
+#sub-page h2 {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.sub-page-content {
   display: flex;
   gap: 40px;
-  margin-top: 20px;
   text-align: left;
 }
 
-#andreas .andreas-text {
+.sub-page-text {
   flex: 2;
 }
 
-#andreas .andreas-text p {
+.sub-page-text p {
   margin-bottom: 1rem;
   font-size: 1.05rem;
 }
 
-#andreas .andreas-summary {
+.sub-page-summary {
   flex: 1;
 }
 
-#andreas .andreas-summary h3 {
+.sub-page-summary h3 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
   color: var(--color-primary);
   text-align: left;
 }
 
-#andreas .andreas-summary ul {
+.sub-page-summary ul {
   list-style: none;
   padding: 0;
 }
 
-#andreas .andreas-summary li {
+.sub-page-summary li {
   padding: 8px 0;
   border-bottom: 1px solid #ddd;
   font-size: 0.95rem;
 }
 
-#andreas .andreas-summary li::before {
+.sub-page-summary li::before {
   content: "\265F\FE0F ";
+}
+
+/* ===================== */
+/* PROGRAM CARD MODAL    */
+/* ===================== */
+
+.program-card .image {
+  cursor: pointer;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: modalFadeIn 0.3s ease forwards;
+}
+
+.modal-overlay.closing {
+  animation: modalFadeOut 0.25s ease forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  to {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+.modal-content {
+  background: var(--color-light);
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  text-align: left;
+  transform: translateY(30px) scale(0.95);
+  opacity: 0;
+  transition: none;
+}
+
+.modal-overlay.active .modal-content {
+  animation: modalSlideIn 0.3s ease 0.05s forwards;
+}
+
+.modal-overlay.closing .modal-content {
+  animation: modalSlideOut 0.2s ease forwards;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(20px) scale(0.97);
+    opacity: 0;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-light);
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  text-align: left;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+@media (max-width: 900px) {
+  .sub-page-content {
+    flex-direction: column;
+    gap: 20px;
+  }
 }

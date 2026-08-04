@@ -8,45 +8,37 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       flake-utils,
+      ...
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
 
+        minifySite = dir: ''
+          find "${dir}" -type f \( -name '*.html' -o -name '*.css' \) -exec ${pkgs.minify}/bin/minify -i '{}' \;
+        '';
+
         site = pkgs.stdenv.mkDerivation {
           name = "schackeffekt";
-          src = pkgs.lib.cleanSourceWith {
-            src = ./.;
-            filter =
-              path: type:
-              let
-                base = builtins.baseNameOf path;
-              in
-              !(pkgs.lib.hasPrefix "." base)
-              && base != "result"
-              && base != "flake.nix"
-              && base != "flake.lock";
-          };
+          src = ./src;
           buildInputs = with pkgs; [ minify ];
           buildPhase = ''
             mkdir -p "$out"
-            minify -o "$out/index.html" index.html
-            minify -o "$out/stylesheet.css" stylesheet.css
-            cp -r images "$out/"
+            cp -r . "$out/"
+            ${minifySite "$out"}
           '';
           installPhase = "true";
         };
 
         buildScript = pkgs.writeShellScriptBin "build" ''
           set -e
+          rm -rf dist
           mkdir -p dist
-          ${pkgs.minify}/bin/minify -o dist/index.html index.html
-          ${pkgs.minify}/bin/minify -o dist/stylesheet.css stylesheet.css
-          cp -r images dist/
+          cp -r src/. dist/
+          ${minifySite "dist"}
           echo "Built to ./dist/"
         '';
       in
@@ -63,8 +55,8 @@
             echo "🏁 Schackeffekt dev shell"
             echo ""
             echo "  build   → minifiera HTML+CSS till ./dist/"
-            echo "  serve   → python3 -m http.server 8000"
-            echo "  dev     → nix run .  (miniserve)"
+            echo "  serve   → (cd src && python3 -m http.server 8000)"
+            echo "  dev     → nix run .  (miniserve ./src)"
             echo ""
           '';
         };
@@ -73,7 +65,7 @@
 
         apps.default =
           let
-            devServer = pkgs.writeShellScript "dev-server" "${pkgs.miniserve}/bin/miniserve . -p 8000 --index index.html";
+            devServer = pkgs.writeShellScript "dev-server" "${pkgs.miniserve}/bin/miniserve ./src -p 8000 --index index.html";
           in
           {
             type = "app";
